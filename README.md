@@ -95,6 +95,7 @@ This section includes visualizations that provide a deeper understanding of the 
 
 This scatter plot shows the model's predictions against the actual values. A tight cluster of points around the diagonal line of "perfect prediction" demonstrates the model's high accuracy and strong fit to the data.
 ![Predicted vs. Actual CPU Usage](http://url/to/predicted_vs_actual.png)
+![Predicted vs. Actual CPU Usage](https://github.com/pranavv1210/CPU-Usage-Prediction/main/predicted_vs_actual.png?raw=true)
 
 #### 2\. Residual Plot
 
