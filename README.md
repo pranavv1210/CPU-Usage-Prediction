@@ -77,7 +77,7 @@ The high $R^2$ score indicates that the model is highly effective at explaining 
 
 ### 📈 Model Visualizations
 
-This section includes visualizations that provide a deeper understanding of the model's performance and the data itself. The images are linked directly from the repository.
+This section includes visualizations that provide a deeper understanding of the model's performance and the data itself.
 
 #### 1\. Predicted vs. Actual CPU Usage
 
