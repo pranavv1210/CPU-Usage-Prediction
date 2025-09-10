@@ -1,0 +1,11 @@
+stages:
+  train:
+    cmd: python train_model.py
+    deps:
+    - data-1754297123597.csv
+    - train_model.py
+    outs:
+    - model.joblib
+    metrics:
+    - metrics.json:
+        cache: false
