@@ -81,4 +81,4 @@ If you'd like to contribute, feel free to fork the repository and submit a pull 
 
 ### 👤 Author
 
-  * **[Pranav V** - https://github.com/pranavv1210
+  * **Pranav V** - [https://github.com/pranavv1210]
