@@ -1,3 +1,15 @@
+Based on our previous troubleshooting, the image links were the issue. The correct links use the full raw URL on GitHub. The output from your last `git push` command showed it was successful. This means the `.png` image files are now on your GitHub repository.
+
+To make the images visible in your README, you need to use the correct markdown syntax with the **full, raw URLs** to each image file.
+
+Here is the fully updated README with the correct placeholders. You should replace your current `README.md` with this content and then push the change to GitHub.
+
+-----
+
+### README.md
+
+-----
+
 ## CPU Usage Prediction using Machine Learning 💻
 
 ### 📝 Project Overview
@@ -77,11 +89,12 @@ The high $R^2$ score indicates that the model is highly effective at explaining 
 
 ### 📈 Model Visualizations
 
-This section includes visualizations that provide a deeper understanding of the model's performance and the data itself.
+This section includes visualizations that provide a deeper understanding of the model's performance and the data itself. The images are linked directly from the repository.
 
 #### 1\. Predicted vs. Actual CPU Usage
 
 This scatter plot shows the model's predictions against the actual values. A tight cluster of points around the diagonal line of "perfect prediction" demonstrates the model's high accuracy and strong fit to the data.
+![Predicted vs. Actual CPU Usage](http://url/to/predicted_vs_actual.png)
 
 #### 2\. Residual Plot
 
