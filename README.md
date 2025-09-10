@@ -1,15 +1,3 @@
-Based on our previous troubleshooting, the image links were the issue. The correct links use the full raw URL on GitHub. The output from your last `git push` command showed it was successful. This means the `.png` image files are now on your GitHub repository.
-
-To make the images visible in your README, you need to use the correct markdown syntax with the **full, raw URLs** to each image file.
-
-Here is the fully updated README with the correct placeholders. You should replace your current `README.md` with this content and then push the change to GitHub.
-
------
-
-### README.md
-
------
-
 ## CPU Usage Prediction using Machine Learning 💻
 
 ### 📝 Project Overview
