@@ -4,8 +4,9 @@
 
 This project uses machine learning to predict **CPU usage** based on a set of independent variables related to a computing pod's resource requests and runtime. The goal is to build a regression model that can accurately forecast CPU consumption, which is critical for resource management and cost optimization in cloud computing environments.
 
-This repository demonstrates a reproducible machine learning workflow using **Git** for code versioning and **DVC (Data Version Control)** for data and model versioning.
----
+This repository is structured to demonstrate a reproducible machine learning workflow using **Git** for code versioning and **DVC (Data Version Control)** for data and model versioning.
+
+-----
 
 ### 📁 Repository Structure
 
@@ -19,17 +20,20 @@ The project is organized into the following key files:
   * `model.joblib`: The serialized, trained machine learning model.
   * `.gitignore`: Tells Git to ignore large files and folders (like the `data` and `model` directories) to keep the repository small.
   * `.dvcignore`: Tells DVC to ignore specific files.
----
+
+-----
 
 ### 🚀 Getting Started
 
 To reproduce this project, follow these steps.
----
+
+-----
 
 #### **Prerequisites**
 
 Make sure you have **Git** and **Python** installed on your system. It's recommended to use a virtual environment.
----
+
+-----
 
 #### **Installation**
 
@@ -42,7 +46,9 @@ Make sure you have **Git** and **Python** installed on your system. It's recomme
     ```bash
     pip install pandas scikit-learn dvc joblib
     ```
-----
+
+-----
+
 #### **Running the Experiment**
 
 This project uses a DVC pipeline to ensure the entire workflow is reproducible.
@@ -60,7 +66,8 @@ This project uses a DVC pipeline to ensure the entire workflow is reproducible.
     python -m dvc repro
     ```
     This command will execute `train_model.py` and save the trained model and metrics.
----
+
+-----
 
 ### 📊 Model Performance
 
