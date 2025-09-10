@@ -1,5 +1,4 @@
 ## CPU Usage Prediction using Machine Learning 💻
----
 
 ### 📝 Project Overview
 
