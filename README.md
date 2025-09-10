@@ -94,19 +94,26 @@ This section includes visualizations that provide a deeper understanding of the 
 #### 1\. Predicted vs. Actual CPU Usage
 
 This scatter plot shows the model's predictions against the actual values. A tight cluster of points around the diagonal line of "perfect prediction" demonstrates the model's high accuracy and strong fit to the data.
-![Predicted vs. Actual CPU Usage](https://raw.githubusercontent.com/pranavv1210/CPU-Usage-Prediction/main/predicted_vs_actual.png)
+
+![Predicted vs Actual CPU Usage](https://raw.githubusercontent.com/pranavv1210/CPU-Usage-Prediction/main/predicted_vs_actual.png)
 
 #### 2\. Residual Plot
 
 This plot displays the prediction errors (residuals) versus the predicted values. The random scatter of points around the zero line indicates that the model is not making any systematic errors, confirming its robust performance.
 
+![Residual Plot](https://raw.githubusercontent.com/pranavv1210/CPU-Usage-Prediction/main/residual_plot.png)
+
 #### 3\. Feature Importance
 
 This bar chart reveals which features had the most influence on the model's predictions. The height of each bar corresponds to the feature's importance, providing key insights into the factors driving CPU usage.
 
+![Feature Importance](https://raw.githubusercontent.com/pranavv1210/CPU-Usage-Prediction/main/feature_importance.png)
+
 #### 4\. CPU Usage Distribution
 
 This histogram shows the frequency of different CPU usage values in the dataset. It provides a quick overview of the data's characteristics and distribution.
+
+![CPU Usage Distribution](https://raw.githubusercontent.com/pranavv1210/CPU-Usage-Prediction/main/cpu_usage_distribution.png)
 
 -----
 
