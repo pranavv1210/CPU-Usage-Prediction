@@ -1,18 +1,10 @@
-Here is the updated README file with the license information removed and the image links adjusted to be correctly viewed on GitHub.
-
------
-
-### README.md
-
------
-
 ## CPU Usage Prediction using Machine Learning 💻
 
 ### 📝 Project Overview
 
-This project uses machine learning to predict **CPU usage** based on a set of independent variables related to a computing pod's resource requests and runtime. The goal is to build a regression model that can accurately forecast CPU consumption, which is critical for resource management and and cost optimization in cloud computing environments.
+This project uses machine learning to predict **CPU usage** based on a set of independent variables related to a computing pod's resource requests and runtime. The goal is to build a regression model that can accurately forecast CPU consumption, which is critical for resource management and cost optimization in cloud computing environments.
 
-This repository is structured to demonstrate a reproducible machine learning workflow using **Git** for code versioning and **DVC (Data Version Control)** for data and model versioning.
+This repository demonstrates a reproducible machine learning workflow using **Git** for code versioning and **DVC (Data Version Control)** for data and model versioning.
 
 ### 📁 Repository Structure
 
@@ -85,7 +77,7 @@ The high $R^2$ score indicates that the model is highly effective at explaining 
 
 ### 📈 Model Visualizations
 
-This section includes visualizations that provide a deeper understanding of the model's performance and the data itself.
+This section includes visualizations that provide a deeper understanding of the model's performance and the data itself. The images are linked directly from the repository.
 
 #### 1\. Predicted vs. Actual CPU Usage
 
