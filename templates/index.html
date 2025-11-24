@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Usage Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --bg: #0f172a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border_box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.5);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            text-align: center;
+            display: none;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0.5rem 0;
+        }
+
+        .result-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CPU Predictor</h1>
+        <p class="subtitle">AI-powered resource estimation</p>
+        
+        <form id="predictForm">
+            <div class="form-group">
+                <label for="cpu_request">CPU Request (mCores)</label>
+                <input type="number" id="cpu_request" name="cpu_request" required placeholder="e.g. 500">
+            </div>
+            
+            <div class="form-group">
+                <label for="mem_request">Memory Request (MiB)</label>
+                <input type="number" id="mem_request" name="mem_request" required placeholder="e.g. 512">
+            </div>
+
+            <div class="form-group">
+                <label for="cpu_limit">CPU Limit (mCores)</label>
+                <input type="number" id="cpu_limit" name="cpu_limit" required placeholder="e.g. 1000">
+            </div>
+
+            <div class="form-group">
+                <label for="mem_limit">Memory Limit (MiB)</label>
+                <input type="number" id="mem_limit" name="mem_limit" required placeholder="e.g. 1024">
+            </div>
+
+            <div class="form-group">
+                <label for="runtime_minutes">Runtime (Minutes)</label>
+                <input type="number" id="runtime_minutes" name="runtime_minutes" required placeholder="e.g. 60">
+            </div>
+
+            <div class="form-group">
+                <label for="controller_kind">Controller Type</label>
+                <select id="controller_kind" name="controller_kind">
+                    <option value="Deployment">Deployment</option>
+                    <option value="StatefulSet">StatefulSet</option>
+                    <option value="DaemonSet">DaemonSet</option>
+                </select>
+            </div>
+
+            <button type="submit">Predict Usage</button>
+        </form>
+
+        <div id="result">
+            <div class="result-label">Predicted CPU Usage</div>
+            <div class="result-value" id="predictionValue">--</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('predictForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const button = e.target.querySelector('button');
+            const originalText = button.innerText;
+            
+            button.innerText = 'Calculating...';
+            button.disabled = true;
+            
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.prediction !== undefined) {
+                    const resultDiv = document.getElementById('result');
+                    const valueDiv = document.getElementById('predictionValue');
+                    
+                    // Format percentage
+                    const percentage = (data.prediction * 100).toFixed(2) + '%';
+                    valueDiv.innerText = percentage;
+                    resultDiv.style.display = 'block';
+                } else {
+                    alert('Error: ' + (data.error || 'Unknown error'));
+                }
+            } catch (err) {
+                alert('Failed to connect to server');
+            } finally {
+                button.innerText = originalText;
+                button.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
