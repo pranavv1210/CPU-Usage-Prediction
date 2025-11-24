@@ -13,7 +13,7 @@ file_name = "data-1754297123597.csv"
 df = pd.read_csv(file_name)
 
 # Select the independent and dependent variables
-independent_variables = ['cpu_request', 'mem_request', 'cpu_limit', 'mem_limit', 'runtime_minutes', 'controller_kind']
+independent_variables = ['cpu_request', 'mem_request', 'cpu_limit', 'mem_limit', 'runtime_minutes']
 dependent_variable = 'cpu_usage'
 
 # Filter the DataFrame to only include the columns we need
@@ -21,9 +21,6 @@ df = df[independent_variables + [dependent_variable]].copy()
 
 # Drop rows with missing values in the selected columns
 df.dropna(subset=independent_variables, inplace=True)
-
-# Handle the categorical variable 'controller_kind' using one-hot encoding
-df = pd.get_dummies(df, columns=['controller_kind'], drop_first=True)
 
 # Define features (X) and target (y)
 X = df.drop(columns=[dependent_variable])
