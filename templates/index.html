@@ -158,46 +158,127 @@
         }
 
         .result-value {
-            <p class="subtitle">AI-powered resource estimation</p><form id="predictForm"><div class="form-group"><label for="cpu_request">CPU Request (mCores)</label><input type="number" id="cpu_request" name="cpu_request" required placeholder="e.g. 500"></div><div class="form-group"><label for="mem_request">Memory Request (MiB)</label><input type="number" id="mem_request" name="mem_request" required placeholder="e.g. 512"></div><div class="form-group"><label for="cpu_limit">CPU Limit (mCores)</label><input type="number" id="cpu_limit" name="cpu_limit" required placeholder="e.g. 1000"></div><div class="form-group"><label for="mem_limit">Memory Limit (MiB)</label><input type="number" id="mem_limit" name="mem_limit" required placeholder="e.g. 1024"></div><div class="form-group"><label for="runtime_minutes">Runtime (Minutes)</label><input type="number" id="runtime_minutes" name="runtime_minutes" required placeholder="e.g. 60"></div><button type="submit">Predict Usage</button></form><div id="result"><div class="result-label">Predicted CPU Usage</div><div class="result-value" id="predictionValue">--</div></div></div><script>document.getElementById('predictForm').addEventListener('submit', async (e)=> {
-                    e.preventDefault();
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0.5rem 0;
+        }
 
-                    const formData=new FormData(e.target);
-                    const button=e.target.querySelector('button');
-                    const originalText=button.innerText;
+        .result-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
 
-                    button.innerText='Calculating...';
-                    button.disabled=true;
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
 
-                    try {
-                        const response=await fetch('/predict', {
-                            method: 'POST',
-                            body: formData
-                        });
+        .heart {
+            color: #ef4444;
+            display: inline-block;
+            animation: beat 1s infinite;
+        }
 
-                    const data=await response.json();
+        @keyframes beat {
 
-                    if (data.prediction !==undefined) {
-                        const resultDiv=document.getElementById('result');
-                        const valueDiv=document.getElementById('predictionValue');
+            0%,
+            100% {
+                transform: scale(1);
+            }
 
-                        // Format percentage
-                        const percentage=(data.prediction * 100).toFixed(2) + '%';
-                        valueDiv.innerText=percentage;
-                        resultDiv.style.display='block';
-                    }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+    </style>
+</head>
 
-                    else {
-                        alert('Error: ' + (data.error || 'Unknown error'));
-                    }
+<body>
+    <div class="container">
+        <h1>CPU Predictor</h1>
+        <p class="subtitle">AI-powered resource estimation</p>
+
+        <form id="predictForm">
+            <div class="form-group">
+                <label for="cpu_request">CPU Request (mCores)</label>
+                <input type="number" id="cpu_request" name="cpu_request" required placeholder="e.g. 500">
+            </div>
+
+            <div class="form-group">
+                <label for="mem_request">Memory Request (MiB)</label>
+                <input type="number" id="mem_request" name="mem_request" required placeholder="e.g. 512">
+            </div>
+
+            <div class="form-group">
+                <label for="cpu_limit">CPU Limit (mCores)</label>
+                <input type="number" id="cpu_limit" name="cpu_limit" required placeholder="e.g. 1000">
+            </div>
+
+            <div class="form-group">
+                <label for="mem_limit">Memory Limit (MiB)</label>
+                <input type="number" id="mem_limit" name="mem_limit" required placeholder="e.g. 1024">
+            </div>
+
+            <div class="form-group">
+                <label for="runtime_minutes">Runtime (Minutes)</label>
+                <input type="number" id="runtime_minutes" name="runtime_minutes" required placeholder="e.g. 60">
+            </div>
+
+            <button type="submit">Predict Usage</button>
+        </form>
+
+        <div id="result">
+            <div class="result-label">Predicted CPU Usage</div>
+            <div class="result-value" id="predictionValue">--</div>
+        </div>
+
+        <div class="footer">
+            Made with <span class="heart">♥</span> by Pranav
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('predictForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const button = e.target.querySelector('button');
+            const originalText = button.innerText;
+
+            button.innerText = 'Calculating...';
+            button.disabled = true;
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.prediction !== undefined) {
+                    const resultDiv = document.getElementById('result');
+                    const valueDiv = document.getElementById('predictionValue');
+
+                    // Format percentage
+                    const percentage = (data.prediction * 100).toFixed(2) + '%';
+                    valueDiv.innerText = percentage;
+                    resultDiv.style.display = 'block';
+                } else {
+                    alert('Error: ' + (data.error || 'Unknown error'));
                 }
+            } catch (err) {
+                alert('Failed to connect to server');
+            } finally {
+                button.innerText = originalText;
+                button.disabled = false;
+            }
+        });
+    </script>
+</body>
 
-                catch (err) {
-                    alert('Failed to connect to server');
-                }
-
-                finally {
-                    button.innerText=originalText;
-                    button.disabled=false;
-                }
-            });
-        </script></body></html>
+</html>
